@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import * as React from 'react'
-import {context as fiberContext, useFrame, useThree} from '@react-three/fiber'
+import {useFrame, useThree} from '@react-three/fiber'
 import {mergeRefs} from 'react-merge-refs'
 
 const ScrollContext = React.createContext(null)
