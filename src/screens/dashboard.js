@@ -25,7 +25,6 @@ function DashboardScreen() {
         <Canvas 
           shadows
           gl={{ antialias: false }}
-          // camera={{position: [3, 3, 3]}}
           dpr={[1, 1.5]}
         >
           <ScrollControls 
@@ -42,14 +41,6 @@ function DashboardScreen() {
           <EnvironmentBlur/>
           <Preload/>
         </Canvas>
-          {/* <div style={{ overflowX: 'none',}}>
-            <h1 style={{ position: 'absolute', top: '20vh', left: '-75vw' }}>home</h1>
-            <h1 style={{ position: 'absolute', top: '20vh', left: '25vw' }}>to</h1>
-            <h1 style={{ position: 'absolute', top: '20vh', left: '125vw' }}>be</h1>
-            <h1 style={{ position: 'absolute', top: '20vh', left: '225vw' }}>home</h1>
-            <h1 style={{ position: 'absolute', top: '20vh', left: '325vw' }}>to</h1>
-            <h1 style={{ position: 'absolute', top: '20vh', left: '425vw' }}>be</h1>
-          </div> */}
       </React.Suspense>
     </div>
   )

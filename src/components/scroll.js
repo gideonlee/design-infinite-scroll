@@ -162,50 +162,17 @@ const ScrollCanvas = React.forwardRef(({ children }, ref) => {
   const group = React.useRef(null)
   const state = useScroll()
   const { width, height } = useThree((state) => state.viewport)
+
+  // Canvas scrolling
   useFrame(() => {
-    // console.log(group.current.position)
-    // console.log(state.horizontal)
-    // console.log(state.pages)
-    // console.log(state.offset)
-    // console.log(-width)
-    // console.log(state.pages)
     group.current.position.x = state.horizontal ? -width * (state.pages - 1) * state.offset : 0
     group.current.position.y = state.horizontal ? 0 : height * (state.pages - 1) * state.offset
   })
   return <group ref={mergeRefs([ref, group])}>{children}</group>
 })
 
-const ScrollHtml = React.forwardRef(
-  ({ children, style, ...props }, ref) => {
-    const state = useScroll()
-    const group = React.useRef(null)
-    const { width, height } = useThree((state) => state.size)
-    const fiberState = React.useContext(fiberContext)
-    useFrame(() => {
-      if (state.delta > state.eps) {
-        group.current.style.transform = `translate3d(${state.horizontal ? -width * (state.pages - 1) * state.offset : 0}px,${
-          state.horizontal ? 0 : height * (state.pages - 1) * -state.offset
-        }px,0)`
-      }
-    })
-    
-    return (
-      <div 
-        ref={mergeRefs([ref, group])} 
-        style={{ ...style, position: 'absolute', top: 0, left: 0, willChange: 'transform' }} {...props}
-      >
-        <ScrollContext.Provider value={state}>
-          <fiberContext.Provider value={fiberState}>{children}</fiberContext.Provider>
-        </ScrollContext.Provider>
-      </div>
-      // state.fixed
-    )
-  }
-)
-
-const Scroll = React.forwardRef(({ html, ...props }, ref) => {
-  const El = html ? ScrollHtml : ScrollCanvas
-  return <El ref={ref} {...props} />
+const Scroll = React.forwardRef((props, ref) => {
+  return <ScrollCanvas ref={ref} {...props} />
 })
 
 export {ScrollControls, Scroll, useScroll}
